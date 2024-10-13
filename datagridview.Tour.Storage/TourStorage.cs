@@ -6,6 +6,9 @@ using datagridview.Contracts;
 
 namespace datagridview.Tour.Storage
 {
+    /// <summary>
+    /// Интерфейс, указывающий методы для хранилища туров
+    /// </summary>
     public class TourStorage : ITourStorage
     {
         private readonly List<Contracts.Models.Tour> tours = new List<Contracts.Models.Tour>();

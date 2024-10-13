@@ -5,6 +5,9 @@ using datagridview.Forms;
 
 namespace datagridview
 {
+    /// <summary>
+    /// Главная форма приложения, отображающая все туры
+    /// </summary>
     public partial class MainForm : Form
     {
         private ITourManager tourManager;

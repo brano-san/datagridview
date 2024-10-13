@@ -10,6 +10,9 @@ namespace datagridview.src
 {
     static internal class Extensions
     {
+        /// <summary>
+        /// Метод создания binding для Control
+        /// </summary>
         public static void AddBinding<TControl, TSource>(this TControl target,
             Expression<Func<TControl, object>> targetProperty,
             TSource source,

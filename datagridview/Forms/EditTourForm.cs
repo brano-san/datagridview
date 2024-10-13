@@ -5,8 +5,14 @@ using datagridview.src;
 
 namespace datagridview.Forms
 {
+    /// <summary>
+    /// Форма для добавления и редактирования данных
+    /// </summary>
     public partial class EditTourForm : Form
     {
+        /// <summary>
+        /// Тур, для обработки (добавления/редактирования). Получить после завершения работы с формой
+        /// </summary>
         public Contracts.Models.Tour CurrentTour { get; private set; }
 
         public EditTourForm(Contracts.Models.Tour tour = null)
