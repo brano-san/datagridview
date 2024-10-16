@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -26,6 +27,7 @@ namespace datagridview.Contracts.Models
         /// Дата отправления в тур
         /// </summary>
         [DisplayName("Дата отправления")]
+        [Required(ErrorMessage = "Дата отправления обязательна.")]
         public DateTime? DepartureDate { get; set; }
 
         /// <summary>
@@ -39,6 +41,8 @@ namespace datagridview.Contracts.Models
         /// Цена тура для одного человека
         /// </summary>
         [DisplayName("Цена за человека")]
+        [Required(ErrorMessage = "Цена тура обязательна.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Цена должна быть больше 0.")]
         public double PricePerTour { get; set; }
 
         /// <summary>
@@ -58,12 +62,15 @@ namespace datagridview.Contracts.Models
         /// Количество взимаемой дополнительной платы
         /// </summary>
         [DisplayName("Доп. Плата")]
+        [Range(0, double.MaxValue, ErrorMessage = "Дополнительная плата не может быть отрицательной.")]
         public double AdditionalFees { get; set; }
 
-        /// <summary>
-        /// Итоговая цена за весь тур
-        /// </summary>
-        [DisplayName("Итоговая цена")]
-        public double TotalCost { get; set; }
+        public bool IsValid()
+        {
+            var context = new ValidationContext(this);
+            var results = new List<ValidationResult>();
+
+            return Validator.TryValidateObject(this, context, results, validateAllProperties: true);
+        }
     }
 }

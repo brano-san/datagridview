@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using datagridview.src;
 
 namespace datagridview.Forms
 {
     /// <summary>
-    /// Форма для добавления и редактирования данных
+    /// Форма для добавления и редактирования данных через <see cref="CurrentTour"/>
     /// </summary>
     public partial class EditTourForm : Form
     {
@@ -53,7 +52,7 @@ namespace datagridview.Forms
             nudNights.AddBinding(x => x.Value, CurrentTour, x => x.Nights, errorProvider1);
             nudPricePerTour.AddBinding(x => x.Value, CurrentTour, x => x.PricePerTour, errorProvider1);
             nudPeopleCount.AddBinding(x => x.Text, CurrentTour, x => x.PeopleCount, errorProvider1);
-            chkWifi.AddBinding(x => x.Checked, CurrentTour, x => x.HasWifi, errorProvider1);
+            chkWifi.AddBinding(x => x.Checked, CurrentTour, x => x.HasWifi);
             nudAdditionalFees.AddBinding(x => x.Value, CurrentTour, x => x.AdditionalFees, errorProvider1);
         }
 
@@ -69,9 +68,23 @@ namespace datagridview.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (errorProvider1.ContainerControl.Controls.Cast<Control>().Any(c => errorProvider1.GetError(c) != ""))
+            DialogResult result = MessageBox.Show(
+                "Вы действительно изменить данные?",
+                "Подтверждение изменений",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result != DialogResult.Yes)
+            {
+                Close();
+                return;
+            }
+
+            if (!CurrentTour.IsValid())
             {
                 MessageBox.Show("Некорректные данные", "Ошибка");
+                Close();
                 return;
             }
 

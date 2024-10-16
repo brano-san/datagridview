@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using datagridview.Contracts;
 using datagridview.Contracts.Models;
+using datagridview.TourManager.Models;
 
 namespace datagridview.TourManager
 {
     /// <summary>
-    /// Интерфейс, указывающий методы для управления хранилищем туров
+    /// Класс управления хранилищем туров <see cref="tourStorage"/>
     /// </summary>
     public class TourManager : ITourManager
     {
@@ -19,7 +21,7 @@ namespace datagridview.TourManager
         }
 
         /// <summary>
-        /// Метод для добавления тура в коллекцию
+        /// Метод для добавления тура в коллекцию <see cref="tourStorage"/>
         /// </summary>
         public async Task<Tour> AddTourAsync(Tour tour)
         {
@@ -28,7 +30,7 @@ namespace datagridview.TourManager
         }
 
         /// <summary>
-        /// Метод для удаления тура из коллекции
+        /// Метод для удаления тура из коллекции <see cref="tourStorage"/>
         /// </summary>
         public async Task<bool> DeleteTourAsync(Guid id)
         {
@@ -37,15 +39,28 @@ namespace datagridview.TourManager
         }
 
         /// <summary>
-        /// Метод для редактирования тура в коллекции
+        /// Метод для редактирования тура в коллекции <see cref="tourStorage"/>
         /// </summary>
         public Task EditTourAsync(Tour tour)
         => tourStorage.EditTourAsync(tour);
 
         /// <summary>
-        /// Метод для получения коллекции туров
+        /// Метод для получения коллекции туров <see cref="tourStorage"/>
         /// </summary>
         public Task<IReadOnlyCollection<Tour>> GetAllToursAsync()
             => tourStorage.GetAllToursAsync();
+
+        /// <inheritdoc cref="IProductManager.GetStatsAsync"/>
+        public async Task<ITourStats> GetStatsAsync()
+        {
+            var tour = await tourStorage.GetAllToursAsync();
+            return new TourStatsModel()
+            {
+                ToursCount = tour.Count,
+                TotalSum = tour.Select(x => x.PeopleCount * x.PricePerTour + x.AdditionalFees).Sum(),
+                ToursCountWithAdd = tour.Count(x => x.AdditionalFees != 0),
+                AdditionSum = tour.Select(x => x.AdditionalFees).Sum(),
+            };
+        }
     }
 }
