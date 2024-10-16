@@ -11,7 +11,7 @@ namespace datagridview.src
     static internal class Extensions
     {
         /// <summary>
-        /// Метод создания binding для Control
+        /// Метод создания Bindings для Control
         /// </summary>
         public static void AddBinding<TControl, TSource>(this TControl target,
             Expression<Func<TControl, object>> targetProperty,
@@ -33,8 +33,13 @@ namespace datagridview.src
             }
 
             var sourcePropertyInfo = source.GetType().GetProperty(sourceName);
-            var validarors = sourcePropertyInfo.GetCustomAttributes<ValidationAttribute>();
-            if (validarors?.Any() == false)
+            if (sourcePropertyInfo == null)
+            {
+                return;
+            }
+
+            var validators = sourcePropertyInfo.GetCustomAttributes<ValidationAttribute>();
+            if (validators?.Any() == false)
             {
                 return;
             }
@@ -66,6 +71,12 @@ namespace datagridview.src
             if (targetMember.Body is UnaryExpression unaryExpression)
             {
                 var operand = unaryExpression.Operand as MemberExpression;
+
+                if (operand == null)
+                {
+                    throw new NullReferenceException("GetMemberName: operand is null");
+                }
+
                 return operand.Member.Name;
             }
 

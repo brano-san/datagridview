@@ -29,5 +29,10 @@ namespace datagridview.Contracts
         /// Метод для удаления тура из коллекции
         /// </summary>
         Task<bool> DeleteTourAsync(Guid id);
+
+        /// <summary>
+        /// Получение стастики по всем турам  <see cref="ITourStats"/>
+        /// </summary>
+        Task<ITourStats> GetStatsAsync();
     }
 }
