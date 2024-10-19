@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace datagridview.Contracts.Models
 {
     /// <summary>
-    /// Класс, описывающий тур
+    /// Описание тура
     /// </summary>
     public class Tour
     {
