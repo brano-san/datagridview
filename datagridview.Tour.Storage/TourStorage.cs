@@ -6,25 +6,19 @@ using datagridview.Contracts;
 
 namespace datagridview.Tour.Storage
 {
-    /// <summary>
-    /// Класс обеспечивающий хранение туров <see cref="tours"/>
-    /// </summary>
+    /// <inheritdoc cref="ITourStorage"/>
     public class TourStorage : ITourStorage
     {
         private readonly List<Contracts.Models.Tour> tours = new List<Contracts.Models.Tour>();
 
-        /// <summary>
-        /// Метод добавления туров в коллекцию <see cref="tours"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourStorage.AddTourAsync"/>
         public Task<Contracts.Models.Tour> AddTourAsync(Contracts.Models.Tour tour)
         {
             tours.Add(tour);
             return Task.FromResult(tour);
         }
 
-        /// <summary>
-        /// Метод удаления туров из коллекции <see cref="tours"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourStorage.DeleteTourAsync"/>
         public Task<bool> DeleteTourAsync(Guid id)
         {
             var person = tours.FirstOrDefault(x => x.Id == id);
@@ -37,9 +31,7 @@ namespace datagridview.Tour.Storage
             return Task.FromResult(false);
         }
 
-        /// <summary>
-        /// Метод редактирования туров в коллекции <see cref="tours"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourStorage.EditTourAsync"/>
         public Task EditTourAsync(Contracts.Models.Tour tour)
         {
             if (tour == null)
@@ -63,9 +55,7 @@ namespace datagridview.Tour.Storage
             return Task.CompletedTask;
         }
 
-        /// <summary>
-        /// Метод получения коллекции туров <see cref="tours"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourStorage.GetAllToursAsync"/>
         public Task<IReadOnlyCollection<Contracts.Models.Tour>> GetAllToursAsync()
             => Task.FromResult<IReadOnlyCollection<Contracts.Models.Tour>>(tours);
     }

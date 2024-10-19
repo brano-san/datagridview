@@ -11,8 +11,8 @@ namespace datagridview
     /// </summary>
     public partial class MainForm : Form
     {
-        private ITourManager tourManager;
-        private BindingSource bindingSource;
+        private readonly ITourManager tourManager;
+        private readonly BindingSource bindingSource;
 
         public MainForm(ITourManager tourManager)
         {
@@ -26,6 +26,18 @@ namespace datagridview
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(
+                "Вы действительно хотите редактировать строку?",
+                "Подтверждение редактирования",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
             if (dataGridView1.SelectedRows.Count <= 0)
             {
                 return;

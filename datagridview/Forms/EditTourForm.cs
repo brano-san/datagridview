@@ -68,23 +68,9 @@ namespace datagridview.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "Вы действительно изменить данные?",
-                "Подтверждение изменений",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
-
-            if (result != DialogResult.Yes)
-            {
-                Close();
-                return;
-            }
-
             if (!CurrentTour.IsValid())
             {
                 MessageBox.Show("Некорректные данные", "Ошибка");
-                Close();
                 return;
             }
 

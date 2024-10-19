@@ -8,9 +8,7 @@ using datagridview.TourManager.Models;
 
 namespace datagridview.TourManager
 {
-    /// <summary>
-    /// Класс управления хранилищем туров <see cref="tourStorage"/>
-    /// </summary>
+    /// <inheritdoc cref="ITourManager"/>
     public class TourManager : ITourManager
     {
         private ITourStorage tourStorage;
@@ -20,33 +18,25 @@ namespace datagridview.TourManager
             this.tourStorage = tourStorage;
         }
 
-        /// <summary>
-        /// Метод для добавления тура в коллекцию <see cref="tourStorage"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourManager.AddTourAsync"/>
         public async Task<Tour> AddTourAsync(Tour tour)
         {
             var result = await tourStorage.AddTourAsync(tour);
             return result;
         }
 
-        /// <summary>
-        /// Метод для удаления тура из коллекции <see cref="tourStorage"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourManager.DeleteTourAsync"/>
         public async Task<bool> DeleteTourAsync(Guid id)
         {
             var result = await tourStorage.DeleteTourAsync(id);
             return result;
         }
 
-        /// <summary>
-        /// Метод для редактирования тура в коллекции <see cref="tourStorage"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourManager.EditTourAsync"/>
         public Task EditTourAsync(Tour tour)
         => tourStorage.EditTourAsync(tour);
 
-        /// <summary>
-        /// Метод для получения коллекции туров <see cref="tourStorage"/>
-        /// </summary>
+        /// <inheritdoc cref="ITourManager.GetAllToursAsync"/>
         public Task<IReadOnlyCollection<Tour>> GetAllToursAsync()
             => tourStorage.GetAllToursAsync();
 
