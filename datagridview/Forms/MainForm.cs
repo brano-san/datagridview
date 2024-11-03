@@ -1,9 +1,6 @@
-using System;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using datagridview.Contracts;
 using datagridview.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.Extensions.Logging;
 
 namespace datagridview
 {
@@ -14,12 +11,14 @@ namespace datagridview
     {
         private readonly ITourManager tourManager;
         private readonly BindingSource bindingSource;
+        private readonly ILogger logger;
 
-        public MainForm(ITourManager tourManager)
+        public MainForm(ITourManager tourManager, ILogger logger)
         {
             InitializeComponent();
 
             this.tourManager = tourManager;
+            this.logger = logger;
 
             bindingSource = new BindingSource();
             dataGridView1.DataSource = bindingSource;
@@ -36,30 +35,37 @@ namespace datagridview
 
             if (result != DialogResult.Yes)
             {
+                logger.LogInformation("Редактирование отменено");
                 return;
             }
 
             if (dataGridView1.SelectedRows.Count <= 0)
             {
+                logger.LogInformation("Редактирование отменено. Отсутствуют данные");
                 return;
             }
+
             var selectedTour = (Contracts.Models.Tour)dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].DataBoundItem;
-            var form = new EditTourForm(selectedTour);
+            var form = new EditTourForm(selectedTour, logger);
             if (form.ShowDialog() != DialogResult.OK)
             {
+                logger.LogInformation("Редактирование отменено. Результат редактирования отрицательный");
                 return;
             }
 
             await tourManager.EditTourAsync(form.CurrentTour);
             bindingSource.ResetBindings(false);
             await UpdateToolStrip();
+
+            logger.LogInformation("Данные успешно отредактированы");
         }
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-            var form = new EditTourForm();
+            var form = new EditTourForm(null, logger);
             if (form.ShowDialog() != DialogResult.OK)
             {
+                logger.LogInformation("Добавление отменено");
                 return;
             }
 
@@ -72,6 +78,7 @@ namespace datagridview
         {
             if (dataGridView1.CurrentRow == null)
             {
+                logger.LogInformation("Удаление отменено. Нет выделенной строки");
                 return;
             }
 
@@ -84,6 +91,7 @@ namespace datagridview
 
             if (result != DialogResult.Yes)
             {
+                logger.LogInformation("Удаление отменено");
                 return;
             }
 
@@ -92,6 +100,8 @@ namespace datagridview
             await tourManager.DeleteTourAsync(selectedTour.Id);
             bindingSource.ResetBindings(false);
             await UpdateToolStrip();
+
+            logger.LogInformation("Удаление завершено успешно");
         }
 
         private async Task UpdateToolStrip()

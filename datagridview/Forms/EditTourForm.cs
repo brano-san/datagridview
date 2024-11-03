@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
-using datagridview.src;
+﻿using datagridview.src;
+using Microsoft.Extensions.Logging;
 
 namespace datagridview.Forms
 {
@@ -14,12 +13,17 @@ namespace datagridview.Forms
         /// </summary>
         public Contracts.Models.Tour CurrentTour { get; private set; }
 
-        public EditTourForm(Contracts.Models.Tour tour = null)
+        private readonly ILogger logger;
+
+        public EditTourForm(Contracts.Models.Tour tour, ILogger logger)
         {
             InitializeComponent();
 
+            this.logger = logger;
+
             if (tour != null)
             {
+                logger.LogDebug("tour != null. Редактируем существующий тур");
                 CurrentTour = new Contracts.Models.Tour
                 {
                     Id = tour.Id,
@@ -34,6 +38,7 @@ namespace datagridview.Forms
             }
             else
             {
+                logger.LogDebug("tour == null. Добавляем новый тур");
                 CurrentTour = new Contracts.Models.Tour
                 {
                     Id = Guid.NewGuid(),

@@ -1,6 +1,5 @@
-using System;
-using System.Windows.Forms;
 using datagridview.Tour.Storage;
+using Microsoft.Extensions.Logging;
 
 namespace datagridview.src
 {
@@ -15,10 +14,22 @@ namespace datagridview.src
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var tourStorage = new TourStorage();
-            var tourManager = new TourManager.TourManager(tourStorage);
+            var tourManagerLogger = LoggerFactory.Create(builder =>
+            {
+                builder.SetMinimumLevel(LogLevel.Debug);
+                builder.AddConsole();
+            }).CreateLogger(nameof(TourManager));
 
-            Application.Run(new MainForm(tourManager));
+            var mainFormLogger = LoggerFactory.Create(builder =>
+            {
+                builder.SetMinimumLevel(LogLevel.Debug);
+                builder.AddConsole();
+            }).CreateLogger(nameof(MainForm));
+
+            var tourStorage = new TourStorage();
+            var tourManager = new TourManager.TourManager(tourStorage, tourManagerLogger);
+
+            Application.Run(new MainForm(tourManager, mainFormLogger));
         }
     }
 }
