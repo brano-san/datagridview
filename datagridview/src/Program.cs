@@ -1,13 +1,13 @@
-п»їusing System;
+using System;
 using System.Windows.Forms;
 using datagridview.Tour.Storage;
 
-namespace datagridview
+namespace datagridview.src
 {
     static internal class Program
     {
         /// <summary>
-        /// Р“Р»Р°РІРЅР°СЏ С‚РѕС‡РєР° РІС…РѕРґР° РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+        /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         private static void Main()

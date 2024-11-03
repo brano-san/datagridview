@@ -1,13 +1,14 @@
-п»їusing System;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using datagridview.Contracts;
 using datagridview.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace datagridview
 {
     /// <summary>
-    /// Р“Р»Р°РІРЅР°СЏ С„РѕСЂРјР° РїСЂРёР»РѕР¶РµРЅРёСЏ, РѕС‚РѕР±СЂР°Р¶Р°СЋС‰Р°СЏ РІСЃРµ С‚СѓСЂС‹
+    /// Главная форма приложения, отображающая все туры
     /// </summary>
     public partial class MainForm : Form
     {
@@ -27,8 +28,8 @@ namespace datagridview
         private async void btnEdit_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-                "Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ?",
-                "РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ",
+                "Вы действительно хотите редактировать строку?",
+                "Подтверждение редактирования",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
@@ -75,8 +76,8 @@ namespace datagridview
             }
 
             DialogResult result = MessageBox.Show(
-                "Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ СѓРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ?",
-                "РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ",
+                "Вы действительно удалить строку?",
+                "Подтверждение удаления",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
@@ -97,17 +98,17 @@ namespace datagridview
         {
             var stats = await tourManager.GetStatsAsync();
 
-            strip1.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ С‚СѓСЂРѕРІ {stats.ToursCount};";
-            strip2.Text = $"РћР±С‰Р°СЏ СЃСѓРјРјР° {stats.TotalSum}; ";
-            strip3.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ С‚СѓСЂРѕРІ СЃ РґРѕРїР»Р°С‚Р°РјРё {stats.ToursCountWithAdd}; ";
-            strip4.Text = $"РћР±С‰Р°СЏ СЃСѓРјРјР° РґРѕРїР»Р°С‚ {stats.AdditionSum}; ";
+            strip1.Text = $"Количество туров {stats.ToursCount};";
+            strip2.Text = $"Общая сумма {stats.TotalSum}; ";
+            strip3.Text = $"Количество туров с доплатами {stats.ToursCountWithAdd}; ";
+            strip4.Text = $"Общая сумма доплат {stats.AdditionSum}; ";
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
             bindingSource.DataSource = await tourManager.GetAllToursAsync();
             dataGridView1.Columns[nameof(Contracts.Models.Tour.Id)].Visible = false;
-            dataGridView1.Columns.Add("TotalCost", "РћР±С‰Р°СЏ СЃС‚РѕРёРјРѕСЃС‚СЊ");
+            dataGridView1.Columns.Add("TotalCost", "Общая стоимость");
 
             await UpdateToolStrip();
         }
