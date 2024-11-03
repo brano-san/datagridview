@@ -34,7 +34,7 @@ namespace datagridview.TourManager
 
         /// <inheritdoc cref="ITourManager.EditTourAsync"/>
         public Task EditTourAsync(Tour tour)
-        => tourStorage.EditTourAsync(tour);
+            => tourStorage.EditTourAsync(tour);
 
         /// <inheritdoc cref="ITourManager.GetAllToursAsync"/>
         public Task<IReadOnlyCollection<Tour>> GetAllToursAsync()
