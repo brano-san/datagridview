@@ -5,11 +5,9 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datagridview", "datagridview\datagridview.csproj", "{18F086E9-ADF6-47B5-B77A-CEE0C16F395C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datagridview.Contracts", "datagridview.Contracts\datagridview.Contracts.csproj", "{552E4896-B466-44BA-B1D5-A10195DC2B56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datagridview.Contracts", "datagridview.Contracts\datagridview.Contracts.csproj", "{849AB7D4-E620-4A8C-9E14-8C12DAA4C251}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datagridview.Tour.Storage", "datagridview.Tour.Storage\datagridview.Tour.Storage.csproj", "{47742A1A-00C6-418C-BA3D-02531A0836F4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datagridview.TourManager", "datagridview.TourManager\datagridview.TourManager.csproj", "{108F1B94-6985-4809-BEFD-675406BF58B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datagridview.Tour.Manager", "datagridview.Tour.Manager\datagridview.Tour.Manager.csproj", "{4977405D-6024-420C-A918-38C2AAD3A076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +19,14 @@ Global
 		{18F086E9-ADF6-47B5-B77A-CEE0C16F395C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18F086E9-ADF6-47B5-B77A-CEE0C16F395C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18F086E9-ADF6-47B5-B77A-CEE0C16F395C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{552E4896-B466-44BA-B1D5-A10195DC2B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{552E4896-B466-44BA-B1D5-A10195DC2B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{552E4896-B466-44BA-B1D5-A10195DC2B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{552E4896-B466-44BA-B1D5-A10195DC2B56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47742A1A-00C6-418C-BA3D-02531A0836F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47742A1A-00C6-418C-BA3D-02531A0836F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47742A1A-00C6-418C-BA3D-02531A0836F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47742A1A-00C6-418C-BA3D-02531A0836F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{108F1B94-6985-4809-BEFD-675406BF58B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{108F1B94-6985-4809-BEFD-675406BF58B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{108F1B94-6985-4809-BEFD-675406BF58B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{108F1B94-6985-4809-BEFD-675406BF58B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849AB7D4-E620-4A8C-9E14-8C12DAA4C251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849AB7D4-E620-4A8C-9E14-8C12DAA4C251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849AB7D4-E620-4A8C-9E14-8C12DAA4C251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849AB7D4-E620-4A8C-9E14-8C12DAA4C251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4977405D-6024-420C-A918-38C2AAD3A076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4977405D-6024-420C-A918-38C2AAD3A076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4977405D-6024-420C-A918-38C2AAD3A076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4977405D-6024-420C-A918-38C2AAD3A076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
