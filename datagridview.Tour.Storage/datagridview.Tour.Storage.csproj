@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>PKGH.Ponomarev.datagridview.Tour.Storage</PackageId>
+    <Title>TourStorage</Title>
+    <Authors>branosan</Authors>
+    <Company>PKGH</Company>
+    <Description>Package to store your tours</Description>
+    <PackageTags>PKGH, Storage, TourStorage</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\datagridview.Contracts\datagridview.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
