@@ -8,7 +8,7 @@ using datagridview.Contracts.Models;
 using datagridview.TourManager.Models;
 using Microsoft.Extensions.Logging;
 
-namespace datagridview.TourManager
+namespace datagridview.Tour.Manager
 {
     /// <inheritdoc cref="ITourManager"/>
     public class TourManager : ITourManager
@@ -23,13 +23,13 @@ namespace datagridview.TourManager
         }
 
         /// <inheritdoc cref="ITourManager.AddTourAsync"/>
-        public async Task<Tour> AddTourAsync(Tour tour)
+        public async Task<Contracts.Models.Tour> AddTourAsync(Contracts.Models.Tour tour)
         {
             var timer = Stopwatch.StartNew();
             var result = await tourStorage.AddTourAsync(tour);
             timer.Stop();
 
-            logger.LogInformation("Добавление произошло за {} мс", timer.ElapsedMilliseconds);
+            logger.LogInformation("Добавление произошло за {Ms} мс, тур {@tour}", timer.ElapsedMilliseconds, tour);
             return result;
         }
 
@@ -40,29 +40,29 @@ namespace datagridview.TourManager
             var result = await tourStorage.DeleteTourAsync(id);
             timer.Stop();
 
-            logger.LogInformation("Удаление произошло за {} мс", timer.ElapsedMilliseconds);
+            logger.LogInformation("Удаление произошло за {Ms} мс, id {id}", timer.ElapsedMilliseconds, id);
             return result;
         }
 
         /// <inheritdoc cref="ITourManager.EditTourAsync"/>
-        public Task EditTourAsync(Tour tour)
+        public Task EditTourAsync(Contracts.Models.Tour tour)
         {
             var timer = Stopwatch.StartNew();
             var result = tourStorage.EditTourAsync(tour);
             timer.Stop();
 
-            logger.LogInformation("Редактирование произошло за {} мс", timer.ElapsedMilliseconds);
+            logger.LogInformation("Редактирование произошло за {Ms} мс, тур {@tour}", timer.ElapsedMilliseconds, tour);
             return result;
         }
 
         /// <inheritdoc cref="ITourManager.GetAllToursAsync"/>
-        public Task<IReadOnlyCollection<Tour>> GetAllToursAsync()
+        public Task<IReadOnlyCollection<Contracts.Models.Tour>> GetAllToursAsync()
         {
             var timer = Stopwatch.StartNew();
             var result = tourStorage.GetAllToursAsync();
             timer.Stop();
 
-            logger.LogInformation("Получение всех туров произошло за {} мс", timer.ElapsedMilliseconds);
+            logger.LogInformation("Получение всех туров произошло за {Ms} мс", timer.ElapsedMilliseconds);
             return result;
         }
 
@@ -73,7 +73,7 @@ namespace datagridview.TourManager
             var tour = await tourStorage.GetAllToursAsync();
             timer.Stop();
 
-            logger.LogInformation("Получение статистики произошло за {} мс", timer.ElapsedMilliseconds);
+            logger.LogInformation("Получение статистики произошло за {Ms} мс", timer.ElapsedMilliseconds);
 
             return new TourStatsModel()
             {

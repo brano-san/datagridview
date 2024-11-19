@@ -1,5 +1,7 @@
 using datagridview.Tour.Storage;
-using Microsoft.Extensions.Logging;
+
+using Serilog;
+using Serilog.Extensions.Logging;
 
 namespace datagridview.src
 {
@@ -14,22 +16,17 @@ namespace datagridview.src
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var tourManagerLogger = LoggerFactory.Create(builder =>
-            {
-                builder.SetMinimumLevel(LogLevel.Debug);
-                builder.AddConsole();
-            }).CreateLogger(nameof(TourManager));
+            var seriLogger = new LoggerConfiguration()
+                .WriteTo.Seq("http://localhost:5341/", apiKey: "1b46iVbcK2ULBsAYVs5i")
+                .CreateLogger();
 
-            var mainFormLogger = LoggerFactory.Create(builder =>
-            {
-                builder.SetMinimumLevel(LogLevel.Debug);
-                builder.AddConsole();
-            }).CreateLogger(nameof(MainForm));
+            var logger = new SerilogLoggerFactory(seriLogger)
+                .CreateLogger("datagridview");
 
             var tourStorage = new TourStorage();
-            var tourManager = new TourManager.TourManager(tourStorage, tourManagerLogger);
+            var tourManager = new Tour.Manager.TourManager(tourStorage, logger);
 
-            Application.Run(new MainForm(tourManager, mainFormLogger));
+            Application.Run(new MainForm(tourManager, logger));
         }
     }
 }
