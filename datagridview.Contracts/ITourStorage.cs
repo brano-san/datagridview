@@ -23,7 +23,7 @@ namespace datagridview.Contracts
         /// <summary>
         /// Редактирования <see cref="Tour"/> в коллекции
         /// </summary>
-        Task EditTourAsync(Tour tour);
+        Task EditTourAsync(Tour tourToEdit);
 
         /// <summary>
         /// Удаления <see cref="Tour"/> из коллекции

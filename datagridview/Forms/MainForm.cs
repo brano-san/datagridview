@@ -54,6 +54,7 @@ namespace datagridview
             }
 
             await tourManager.EditTourAsync(form.CurrentTour);
+            bindingSource.DataSource = await tourManager.GetAllToursAsync();
             bindingSource.ResetBindings(false);
             await UpdateToolStrip();
 
@@ -70,6 +71,7 @@ namespace datagridview
             }
 
             await tourManager.AddTourAsync(form.CurrentTour);
+            bindingSource.DataSource = await tourManager.GetAllToursAsync();
             bindingSource.ResetBindings(false);
             await UpdateToolStrip();
         }
@@ -98,6 +100,7 @@ namespace datagridview
             var selectedTour = (Contracts.Models.Tour)dataGridView1.CurrentRow.DataBoundItem;
 
             await tourManager.DeleteTourAsync(selectedTour.Id);
+            bindingSource.DataSource = await tourManager.GetAllToursAsync();
             bindingSource.ResetBindings(false);
             await UpdateToolStrip();
 

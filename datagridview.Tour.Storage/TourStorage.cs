@@ -32,26 +32,26 @@ namespace datagridview.Tour.Storage
         }
 
         /// <inheritdoc cref="ITourStorage.EditTourAsync"/>
-        public Task EditTourAsync(Contracts.Models.Tour tour)
+        public Task EditTourAsync(Contracts.Models.Tour tourToEdit)
         {
-            if (tour == null)
+            if (tourToEdit == null)
             {
                 return Task.FromResult(false);
             }
 
-            var target = tours.FirstOrDefault(x => x.Id == tour.Id);
+            var target = tours.FirstOrDefault(x => x.Id == tourToEdit.Id);
             if (target == null)
             {
                 return Task.FromResult(false);
             }
 
-            target.Destination = tour.Destination;
-            target.DepartureDate = tour.DepartureDate;
-            target.Nights = tour.Nights;
-            target.PricePerTour = tour.PricePerTour;
-            target.PeopleCount = tour.PeopleCount;
-            target.HasWifi = tour.HasWifi;
-            target.AdditionalFees = tour.AdditionalFees;
+            target.Destination = tourToEdit.Destination;
+            target.DepartureDate = tourToEdit.DepartureDate;
+            target.Nights = tourToEdit.Nights;
+            target.PricePerTour = tourToEdit.PricePerTour;
+            target.PeopleCount = tourToEdit.PeopleCount;
+            target.HasWifi = tourToEdit.HasWifi;
+            target.AdditionalFees = tourToEdit.AdditionalFees;
             return Task.CompletedTask;
         }
 
