@@ -2,5 +2,5 @@
 
 ## ИП-21-3 Пономарев Андрей Викторович
 ## Инструментальные средства разработки программного обеспечения
-## Задание Data Grid View + Logger + nuget + serilog/seq + xUnit
+## Задание Data Grid View + Logger + nuget + serilog/seq + xUnit + ORM
 ## Вариант 4 - Горящие туры
